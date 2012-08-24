@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<style>
+		/* To change the font-size of PrimeFaces components globally */
+		label { 
+			font-size: 12px !important; 
+			font-weight: bold;
+		}
+		.ui-widget,
+      .ui-widget .ui-widget {
+      	font-size: 12px !important;
+		}
+	</style>	
+</h:head>
+
+<h:body>
+
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
+	
+	<h:form>
+		<p:panel id="panel" header="#{msg['bill-resume']}" style="width:300px">
+			<h:panelGrid columns="1" border="0">
+				<label>#{msg.user}</label>
+				<h:outputText id="userId" value="#{billBean.userId}"/>
+				<label>#{msg.category}</label>
+				<h:outputText value="#{billBean.categoryId}"/>
+				<label>#{msg.paymentDay}</label>
+				<h:outputText value="#{billBean.paymentDate}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+				<label>#{msg.description}</label>
+				<h:outputText value="#{billBean.description}"/>
+				<label>#{msg.price}</label>
+				<h:outputText value="#{billBean.price}"/>
+				<h:panelGrid columns="2" border="0">
+					<p:commandButton type="submit" value="Edit" action="index" ajax="false"/>
+					<p:commandButton type="submit" value="Confirm" action="#{billBean.addBill}" ajax="false" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>
