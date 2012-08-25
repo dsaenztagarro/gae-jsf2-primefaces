@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<html xmlns="http://www.w3.org/1999/xhtml"  
+		xmlns:h="http://java.sun.com/jsf/html" 
 		xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
-<body>
+<h:body>
 
 	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
 
@@ -23,16 +24,16 @@
 				<!-- Navigation -->
 				<div id="navigation">
 					<ul>
-						<li><a href="#">Panel de Control<span><em></em></span></a></li>
-						<li><a href="#">Administración<span><em></em></span></a></li>
-						<li class="last"><a href="#">Datos versión<span><em></em></span></a></li>
+						<li><h:link outcome="controlpanel" value="#{msg['control-panel']}"/><em></em></li>
+						<li><h:link outcome="management" value="#{msg['management']}"/><em></em></li>
+						<li><h:link outcome="admin" value="#{msg.administration}"/><em></em></li>
+						<li><h:link outcome="specification" value="#{msg.specification}" styleClass="last"/><em></em></li>
 					</ul>
 				</div>
 				<!-- End Navigation -->
 
 			</div>
 		</div>
-
 	</ui:composition>
-</body>
+</h:body>
 </html>

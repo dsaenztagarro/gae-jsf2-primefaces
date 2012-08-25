@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+	<title>Gestión de Gastos</title>
+</h:head>
+<h:body>
+
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
+
+	<ui:composition template="/templates/common/layout.xhtml">
+		
+		<ui:define name="navigation">
+			<div id="slider">
+				<div id="header-menu">
+					<div id="specification">
+						<span class="title">${msg.specification}</span>
+						<span class="summary">${msg['specification-summary']}</span>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+		
+		<ui:define name="content">
+			
+			<div id="main">
+				<div class="shell">
+					<label for="">Web Framework: </label>Java Server Faces (Prime Faces: Theme: overcast)<br/>
+					<label for="">Autenticación: </label>JAAS y JSF<br/>
+					<label for="">Repositorio: </label>bitbucket (Git) - <br/>
+				</div>
+			</div>
+			
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

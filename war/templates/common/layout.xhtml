@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="all" /><![endif]-->
+	<!--[if IE]><style type="text/css" media="screen"> #navigation ul li a em { top:32px; } </style><![endif]-->	
+
+	<style>
+		/* To change the font-size of PrimeFaces components globally */
+		label { 
+			font-size: 14px !important; 
+			font-weight: bold;
+		}
+		.ui-widget,
+      .ui-widget .ui-widget {
+      	font-size: 14px !important;
+		}
+		/* Hide Ugly Border In Primefaces Layout Component */
+		.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+		    border: none;
+		}				
+		.ui-layout-unit .ui-layout-unit-content {
+			border: 0;
+			overflow-x: hidden;
+			padding: 0;
+			margin: 0;
+		}
+		
+		/*.ui-layout-unit-content .ui-widget-content {
+			border: none; margin: none; padding: none; background: transparent;
+		}
+		ui-layout-unit ui-widget ui-widget-content ui-corner-all ui-layout-south ui-layout-pane ui-layout-pane-south {
+			border: none; margin: 0; padding: 0; background: transparent;
+		}
+		.ui-layout-bd {
+    border: 0;
+}
+		.ui-layout-pane-south {
+    border: 0;
+}*/
+
+		.ui-layout-resizer {
+			display: none; visibility: hidden;
+		}
+		.body {
+			background: #d3d4ce;
+		}
+		/*.ui-layout-unit .ui-widget .ui-widget-content .ui-corner-all .ui-layout-south .ui-layout-pane .ui-layout-pane-south {
+			border: 0; margin: 0; padding: 0; background: transparent;
+		}*/
+		/*.emptier { border: none; background: transparent; margin: 0; padding:0; height: 0px; } */
+	</style>	
+</h:head>
+
+<h:body style="height: 100%; background: #d3d4ce;">
+
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
+	
+<p:layout fullPage="true">  
+  
+    <p:layoutUnit position="north" size="auto" style="border: none; background: transparent; margin: 0; padding:0">  
+		<ui:insert name="header">
+			<ui:include src="/templates/common/header.xhtml" />
+		</ui:insert>
+		<ui:insert name="navigation">
+		
+		</ui:insert>
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="center" size="auto" style="border: none; background: transparent; margin: 0; padding:0">  
+		<ui:insert name="content">
+			<ui:include src="/templates/common/content.xhtml" />
+		</ui:insert>
+    </p:layoutUnit>  
+      
+    <p:layoutUnit position="south" size="auto" style="border: none; background: transparent; margin: 0; padding:0" >  
+		<ui:insert name="footer">
+			<ui:include src="/templates/common/footer.xhtml" />
+		</ui:insert>
+    </p:layoutUnit>  
+  
+  
+</p:layout>  	
+
+</h:body>
+</html>

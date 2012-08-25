@@ -13,18 +13,18 @@
 
 	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
 	
-	<ui:composition template="/pages/templates/common/common_layout.xhtml">
+	<ui:composition template="/templates/common/common_layout.xhtml">
 	
 		<ui:define name="content">
 			
-			<ui:composition template="/pages/templates/admin_content_layout.xhtml">
+			<ui:composition template="/templates/admin_content_layout.xhtml">
 				
 				<ui:define name="list">
-					<ui:include src="/pages/bill/item_list.xhtml" />
+					<ui:include src="/bill/item_list.xhtml" />
 				</ui:define>
 				
 				<ui:define name="details">
-					<ui:include src="/pages/bill/item_details_readonly.xhtml" />
+					<ui:include src="/bill/item_details_readonly.xhtml" />
 				</ui:define>
 				
 			</ui:composition>

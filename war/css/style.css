@@ -36,7 +36,7 @@ h2, h3,
 /* h1#logo { font-size:0; line-height:0; width:216px; height:90px; float:left; }
 h1#logo a{ display:block; height:90px; text-indent: -4000px; background:url(images/logo.gif); } */
 h1#logo { font-size:0; line-height:0; width:216px; height:90px; float:left; }
-h1#logo a{ display: block; margin-top: 35px; height: 90px; width: 416px; line-height: 20px; font-size: 22px; font-weight: bold; color: white; text-decoration: none; }
+h1#logo a{ background:url(images/money_80x80.png) no-repeat; display: block; margin-top: 5px; padding-left: 100px; padding-top: 31px; height: 90px; width: 416px; line-height: 20px; font-size: 26px; font-weight: bold; color: white; text-decoration: none; }
 
 .shell { width:980px; margin:0 auto; }
 
@@ -110,3 +110,12 @@ a.more { font-size:10px; background:url(images/more.gif) no-repeat 0 center; pad
 #footer .right a:hover{ color:#f6cb44;}
 .footer-logo { float:left; width:169px; height:34px; background:url(images/footer-logo.gif); }
 
+
+#controlpanel { background: url(images/statistics_64x64.png) no-repeat; padding-left: 80px; padding-top: 12px; width: 100%; height: 100% }
+#management { background: url(images/calculator_48x48.png) no-repeat; padding-left: 62px; padding-top: 7px; width: 100%; height: 100% }
+#administration { background: url(images/gear_48x48.png) no-repeat; padding-left: 62px; padding-top: 7px; width: 100%; height: 100% }
+#specification { background: url(images/clipboard_48x48.png) no-repeat; padding-left: 62px; padding-top: 7px; width: 100%; height: 100% }
+
+#header-menu { float: right; width: 400px; height: 70px; margin: 20px 100px 0px 0px; }
+#header-menu .title { float: left; display: block; clear: both; font-weight: bold; font-size: 24px; color: white; }
+#header-menu .summary { float: left; display: block; clear: both; font-weight: normal; font-size: 14px; color: white; }

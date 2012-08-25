@@ -1,4 +1,4 @@
-package com.davlanca.billmanager.bean;
+package com.davlanca.billmanager.controller;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.davlanca.billmanager.service.UserService;
 
-public class LoginBean implements Serializable {
+public class LoginController implements Serializable {
  
 	private static final long serialVersionUID = 1L;
  

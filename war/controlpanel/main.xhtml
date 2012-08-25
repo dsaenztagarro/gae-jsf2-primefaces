@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+	<title>Gestión de Gastos</title>
+</h:head>
+<h:body>
+
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
+
+	<ui:composition template="/templates/common/layout.xhtml">
+		
+		<ui:define name="navigation">
+			<ui:include src="/templates/common/navigation.xhtml">
+				<ui:param name="navigationId" value="controlpanel" />
+				<ui:param name="title" value="${msg['control-panel']}" />
+				<ui:param name="summary" value="${msg['control-panel-summary']}" />
+			</ui:include>
+		</ui:define>
+		
+		<ui:define name="content">
+			
+Panel de control!!
+		
+		</ui:define>
+				
+	</ui:composition>
+
+</h:body>
+</html>

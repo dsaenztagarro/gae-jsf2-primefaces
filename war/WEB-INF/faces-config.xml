@@ -10,7 +10,7 @@ version="2.0">
     	</el-resolver>
     		
 		<locale-config>
-			<default-locale></default-locale>
+			<default-locale>es_ES</default-locale>
 			<supported-locale>en</supported-locale>
 			<supported-locale>es_ES</supported-locale>
 		</locale-config>	
@@ -24,7 +24,7 @@ version="2.0">
 	
 	<managed-bean>
 		<managed-bean-name>billBean</managed-bean-name>
-		<managed-bean-class>com.davlanca.billmanager.bean.BillBean</managed-bean-class>
+		<managed-bean-class>com.davlanca.billmanager.controller.BillController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>billService</property-name>
@@ -34,7 +34,7 @@ version="2.0">
 
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
-		<managed-bean-class>com.davlanca.billmanager.bean.LoginBean</managed-bean-class>
+		<managed-bean-class>com.davlanca.billmanager.controller.LoginController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
 			<property-name>userService</property-name>
@@ -47,13 +47,36 @@ version="2.0">
 		<navigation-case>
 			<from-action>#{loginBean.checkLogin}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/pages/bill/bill_edit.xhtml</to-view-id>
+			<to-view-id>/bill/bill_edit.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{loginBean.checkLogin}</from-action>  
 			<from-outcome>error</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>controlpanel</from-outcome>
+			<to-view-id>/controlpanel/main.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>management</from-outcome>
+			<to-view-id>/bill/bill_edit.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin</from-outcome>
+			<to-view-id>/admin/main.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>specification</from-outcome>
+			<to-view-id>/specification/main.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 

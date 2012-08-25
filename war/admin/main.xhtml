@@ -13,25 +13,18 @@
 
 	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
 
-	<ui:composition template="/pages/templates/common/layout.xhtml">
-
+	<ui:composition template="/templates/common/layout.xhtml">
+		
 		<ui:define name="navigation">
-			<ui:include src="/pages/templates/admin/navigation.xhtml" />
+			<ui:include src="/templates/common/navigation.xhtml">
+				<ui:param name="navigationId" value="administration" />
+				<ui:param name="title" value="${msg['administration']}" />
+				<ui:param name="summary" value="${msg['administration-summary']}" />
+			</ui:include>
 		</ui:define>
-				
 		<ui:define name="content">
 			
-			<ui:decorate template="/pages/templates/admin/layout.xhtml">
-				
-				<ui:define name="list">
-					<ui:include src="/pages/bill/item_list.xhtml" />
-				</ui:define>
-				
-				<ui:define name="details">
-					<ui:include src="/pages/bill/item_details.xhtml" />
-				</ui:define>
-				
-			</ui:decorate>
+Administracion
 		
 		</ui:define>
 				

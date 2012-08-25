@@ -1,4 +1,4 @@
-package com.davlanca.billmanager.bean;
+package com.davlanca.billmanager.controller;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,9 +15,7 @@ import javax.faces.validator.ValidatorException;
 import com.davlanca.billmanager.model.Bill;
 import com.davlanca.billmanager.service.BillService;
 
-@ManagedBean
-@SessionScoped
-public class BillBean implements Serializable {
+public class BillController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
