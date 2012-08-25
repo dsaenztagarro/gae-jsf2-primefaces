@@ -1,40 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
+	xmlns:p="http://primefaces.org/ui"
+>
 <h:head>
-	<meta http-equiv="cache-control" content="no-cache" />
-	<link rel="stylesheet" type="text/css" href="/css/login/reset.css"></link>
-	<link rel="stylesheet" type="text/css" href="/css/login/structure.css"></link>
+	<title>Gestión de Gastos</title>
 </h:head>
+<h:body>
 
-<h:body class="background2">
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
 
-	<h:form styleClass="box login">
-		<fieldset class="boxBody">
-			<h3>Gestión de Gastos Domésticos</h3>
-			<h:messages id="messages" />
-			<p:outputLabel for="userName" value="#{msg.userName}" />
-			<p:inputText id="userName" label="userName"
-				value="#{loginBean.userName}" required="true">
-			</p:inputText>
-			<p:outputLabel for="password" value="#{msg.password}"
-				styleClass="font1" />
-			<p:password id="password" label="password"
-				value="#{loginBean.password}" required="true">
-			</p:password>
-			
-		</fieldset>
-		<footer> 
-			<p:commandButton type="submit" value="#{msg.login}"
-				action="#{loginBean.checkLogin}" ajax="false"></p:commandButton> 
-		</footer>
-	</h:form>
+	<ui:composition template="/templates/common/layout.xhtml">
+		
+		<ui:define name="navigation">
+			<ui:include src="/templates/common/navigation.xhtml">
+				<ui:param name="navigationId" value="login" />
+				<ui:param name="title" value="${msg['login']}" />
+				<ui:param name="summary" value="${msg['login-summary']}" />
+			</ui:include>
+		</ui:define>
+		
+		<ui:define name="content">
+		
+			<h:form styleClass="box login">
+				<fieldset class="boxBody">
+					<h3>Gestión de Gastos Domésticos</h3>
+					<h:messages id="messages" />
+					<p:outputLabel for="userName" value="#{msg.userName}" />
+					<p:inputText id="userName" label="userName"
+						value="#{loginBean.userName}" required="true">
+					</p:inputText>
+					<p:outputLabel for="password" value="#{msg.password}"
+						styleClass="font1" />
+					<p:password id="password" label="password"
+						value="#{loginBean.password}" required="true">
+					</p:password>
+					
+				</fieldset>
+				<footer> 
+					<p:commandButton type="submit" value="#{msg.login}"
+						action="#{loginBean.checkLogin}" ajax="false"></p:commandButton> 
+				</footer>
+			</h:form>
+		
+		</ui:define>
+				
+	</ui:composition>
 
 </h:body>
 </html>

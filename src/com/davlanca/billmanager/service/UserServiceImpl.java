@@ -1,5 +1,6 @@
 package com.davlanca.billmanager.service;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,8 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import com.davlanca.billmanager.dao.UserDAO;
 import com.davlanca.billmanager.model.User;
 
-public class UserServiceImpl implements UserService {
+@SuppressWarnings("serial")
+public class UserServiceImpl implements UserService, Serializable {
 
 	private static final Logger log = Logger.getLogger(AbstractController.class.getName());
 	

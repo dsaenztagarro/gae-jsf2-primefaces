@@ -83,12 +83,12 @@
 							<h:outputLabel for="opt2" value="Option 2" />  
 							<h:panelGrid columns="1">
 								<h:outputLabel for="startDate" value="#{msg.startDate}" />
-								<p:calendar id="startDate" label="startDate" value="#{billBean.startDate}" binding="#{billBean._startDateInput}" required="true" showOn="button">
+								<p:calendar id="startDate" label="startDate" value="#{billBean.startDate}" required="true" showOn="button">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</p:calendar>
 		
 								<h:outputLabel for="endDate" value="#{msg.endDate}" />
-								<p:calendar id="endDate" label="endDate" value="#{billBean.endDate}" binding="#{billBean._endDateInput}" required="true" showOn="button">
+								<p:calendar id="endDate" label="endDate" value="#{billBean.endDate}" required="true" showOn="button">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</p:calendar>
 							</h:panelGrid>  
@@ -107,8 +107,7 @@
 						<f:validateLength minimum="5" maximum="10"></f:validateLength>
 					</p:inputTextarea>
 					<p:message for="description" />
-					<p:commandButton type="submit" value="#{msg.save}" action="resume" ></p:commandButton>
-					<h:link value="¿Aún no tienes una cuenta?" ></h:link>
+					<p:commandButton type="submit" value="#{msg.save}" action="#{billBean.addBill}" ajax="false" ></p:commandButton>
 				</h:panelGrid>
 			</h:form>
 		</p:panel>

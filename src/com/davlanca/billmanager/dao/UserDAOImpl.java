@@ -13,27 +13,30 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import com.davlanca.billmanager.model.User;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
+import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
 @Component
-public class UserDAOImpl implements UserDAO {
+@SuppressWarnings("serial")
+public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 
 	private static final Logger log = Logger.getLogger(AbstractController.class.getName());
 
-	@Autowired
-	private ObjectifyFactory objectifyFactory;
+	//@Autowired
+	//private ObjectifyFactory objectifyFactory;
 
 	public UserDAOImpl() {
 	}
 
-	public UserDAOImpl(ObjectifyFactory objectifyFactory) {
+	/*public UserDAOImpl(ObjectifyFactory objectifyFactory) {
 		this.objectifyFactory = objectifyFactory;
-	}
+	}*/
 
 	@Override
 	public void create(User pet) throws Exception {
 		if (pet != null) {
-			Objectify ofy = objectifyFactory.begin();
+			ObjectifyService.register(User.class);
+			Objectify ofy = ObjectifyService.begin();
 			ofy.put(pet);
 		} else {
 			throw new Exception("You can't create a null pet");
@@ -46,8 +49,10 @@ public class UserDAOImpl implements UserDAO {
 		if (pet == null)
 			return false;
 
-		Objectify ofy = objectifyFactory.begin();
-
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(User.class);
+		Objectify ofy = ObjectifyService.begin();
+		
 		boolean thisAccountAlreadyExist = ofy.query(User.class).get() != null;
 
 		if (thisAccountAlreadyExist) {
@@ -61,14 +66,19 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean remove(User pet) {
-		Objectify ofy = objectifyFactory.begin();
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(User.class);
+		Objectify ofy = ObjectifyService.begin();
+		
 		ofy.delete(pet);
 		return true;
 	}
 
 	@Override
 	public List<User> findAll() {
-		Objectify ofy = objectifyFactory.begin();
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(User.class);
+		Objectify ofy = ObjectifyService.begin();
 
 		Query<User> q = ofy.query(User.class);
 		ArrayList<User> pets = (ArrayList<User>) q.list();
@@ -78,7 +88,9 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
     public List<User> findBy(HashMap<String,Object> propList) {
-    	Objectify ofy = objectifyFactory.begin();
+    	//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(User.class);
+		Objectify ofy = ObjectifyService.begin();
     	
     	Query<User> q = ofy.query(User.class);
     	Iterator<String> it = propList.keySet().iterator();
@@ -94,8 +106,10 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
     public User getByProperty(String propName, Object propValue) {
-    	Objectify ofy = objectifyFactory.begin();
-    	
+    	//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(User.class);
+		Objectify ofy = ObjectifyService.begin();
+		
     	Query<User> q = ofy.query(User.class);
     	q.filter(propName, propValue);
 

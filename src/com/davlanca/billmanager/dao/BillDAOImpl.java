@@ -11,29 +11,36 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import com.davlanca.billmanager.model.Bill;
+import com.davlanca.billmanager.model.User;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
+import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
 @Component
-public class BillDAOImpl implements BillDAO {
+@SuppressWarnings("serial")
+public class BillDAOImpl extends GenericDAOImpl implements BillDAO {
 
 	private static final Logger log = Logger.getLogger(AbstractController.class.getName());
 
-	@Autowired
-	private ObjectifyFactory objectifyFactory;
+	//@Autowired
+	//private ObjectifyFactory objectifyFactory;
 
 	public BillDAOImpl() {
 	}
 
-	public BillDAOImpl(ObjectifyFactory objectifyFactory) {
+	/*public BillDAOImpl(ObjectifyFactory objectifyFactory) {
 		this.objectifyFactory = objectifyFactory;
-	}
+	}*/
 
 	@Override
 	public void create(Bill pet) throws Exception {
+		System.out.println("BillDAOImpl.bill: " + pet);
 		if (pet != null) {
-			Objectify ofy = objectifyFactory.begin();
+			//Objectify ofy = objectifyFactory.begin();
+			ObjectifyService.register(Bill.class);
+			Objectify ofy = ObjectifyService.begin();
+			
 			ofy.put(pet);
 		} else {
 			throw new Exception("You can't create a null pet");
@@ -46,7 +53,9 @@ public class BillDAOImpl implements BillDAO {
 		if (pet == null)
 			return false;
 
-		Objectify ofy = objectifyFactory.begin();
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(Bill.class);
+		Objectify ofy = ObjectifyService.begin();
 
 		boolean thisAccountAlreadyExist = ofy.query(Bill.class).get() != null;
 
@@ -61,14 +70,19 @@ public class BillDAOImpl implements BillDAO {
 
 	@Override
 	public boolean remove(Bill pet) {
-		Objectify ofy = objectifyFactory.begin();
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(Bill.class);
+		Objectify ofy = ObjectifyService.begin();
+		
 		ofy.delete(pet);
 		return true;
 	}
 
 	@Override
 	public List<Bill> findAll() {
-		Objectify ofy = objectifyFactory.begin();
+		//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(Bill.class);
+		Objectify ofy = ObjectifyService.begin();
 
 		Query<Bill> q = ofy.query(Bill.class);
 		ArrayList<Bill> pets = (ArrayList<Bill>) q.list();
@@ -78,7 +92,9 @@ public class BillDAOImpl implements BillDAO {
 	
 	@Override
     public List<Bill> findBy(HashMap<String,Object> propList) {
-    	Objectify ofy = objectifyFactory.begin();
+    	//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(Bill.class);
+		Objectify ofy = ObjectifyService.begin();
     	
     	Query<Bill> q = ofy.query(Bill.class);
     	Iterator<String> it = propList.keySet().iterator();
@@ -94,7 +110,9 @@ public class BillDAOImpl implements BillDAO {
 	
 	@Override
     public Bill getByProperty(String propName, Object propValue) {
-    	Objectify ofy = objectifyFactory.begin();
+    	//Objectify ofy = objectifyFactory.begin();
+		ObjectifyService.register(Bill.class);
+		Objectify ofy = ObjectifyService.begin();
     	
     	Query<Bill> q = ofy.query(Bill.class);
     	q.filter(propName, propValue);

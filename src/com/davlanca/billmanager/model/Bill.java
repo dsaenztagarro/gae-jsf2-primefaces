@@ -1,5 +1,6 @@
 package com.davlanca.billmanager.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Bill {
+@SuppressWarnings("serial")
+public class Bill implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
