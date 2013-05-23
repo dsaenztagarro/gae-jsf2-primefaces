@@ -12,7 +12,7 @@ import com.davlanca.billmanager.model.Bill;
 @SuppressWarnings("serial")
 public class BillServiceImpl implements BillService, Serializable {
 
-	private static final Logger log = Logger.getLogger(AbstractController.class.getName());
+	private static final Logger log = Logger.getLogger(BillServiceImpl.class.getName());
 	
 	@Autowired 
 	private BillDAO billDAO;

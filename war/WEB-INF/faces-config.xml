@@ -5,6 +5,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 version="2.0">
 	<application>
    
+   	<view-handler>com.davlanca.billmanager.util.MobileViewHandler</view-handler>
+   	
     	<el-resolver>
     		org.springframework.web.jsf.el.SpringBeanFacesELResolver
     	</el-resolver>
@@ -21,6 +23,16 @@ version="2.0">
 		</resource-bundle>
 	
 	</application>
+
+	<managed-bean>
+		<managed-bean-name>chartBean</managed-bean-name>
+		<managed-bean-class>com.davlanca.billmanager.controller.ChartController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>billService</property-name>
+			<value>#{billService}</value>
+		</managed-property>	
+	</managed-bean>
 	
 	<managed-bean>
 		<managed-bean-name>billBean</managed-bean-name>
@@ -29,7 +41,7 @@ version="2.0">
 		<managed-property>
 			<property-name>billService</property-name>
 			<value>#{billService}</value>
-		</managed-property>	
+		</managed-property>		
 	</managed-bean>
 
 	<managed-bean>
@@ -40,10 +52,22 @@ version="2.0">
 			<property-name>userService</property-name>
 			<value>#{userService}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>mobileDevice</property-name>
+			<property-class>boolean</property-class>
+			<value>#{sessionScope.session.isMobileDevice}</value>
+		</managed-property>		
 	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{loginBean.checkLogin}</from-action>
+			<from-outcome>success</from-outcome>
+			<if>#{loginBean.mobileDevice}</if>
+			<to-view-id>/bill/mobile/bill/bill_edit.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
 		<navigation-case>
 			<from-action>#{loginBean.checkLogin}</from-action>
 			<from-outcome>success</from-outcome>
@@ -80,4 +104,8 @@ version="2.0">
 		</navigation-case>
 	</navigation-rule>
 
+    <lifecycle>
+        <phase-listener>com.davlanca.billmanager.util.LifeCycleListener</phase-listener>
+    </lifecycle>
+    
 </faces-config>

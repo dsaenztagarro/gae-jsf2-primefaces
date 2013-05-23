@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<style>
+		/* To change the font-size of PrimeFaces components globally */
+		label { 
+			font-size: 14px !important; 
+			font-weight: bold;
+		}
+		.ui-widget,
+      .ui-widget .ui-widget {
+      	font-size: 14px !important;
+		}
+		
+		.grid td {
+			vertical-align: top;
+		}		
+	</style>	
+</h:head>
+
+<h:body>
+
+	<f:loadBundle basename="com.davlanca.billmanager.resources.messages" var="msg"/>
+	
+	<ui:composition>
+	
+		<p:panel id="panel" header="#{msg['bill-details']}"> 
+			<h:form>
+			   <h:panelGrid columns="1" border="0" >
+			   	<p:messages id="messages" />
+			   	<h:outputLabel for="userId" value="#{msg.user}" />
+					<h:selectOneMenu label="#{msg.user}" id="userId" value="#{billBean.userId}" required="true">
+						<f:selectItem itemLabel="" itemValue=""/>
+						<f:selectItem itemLabel="David" itemValue="1"/>
+						<f:selectItem itemLabel="Blanca" itemValue="2"/>
+					</h:selectOneMenu>
+					<p:message for="userId" />
+					<h:outputLabel for="categoryId" value="#{msg.category}" />
+					<h:selectOneMenu label="#{msg.category}" id="categoryId" value="#{billBean.categoryId}" required="true">
+						<f:selectItem itemLabel="" itemValue=""/>
+						<f:selectItem itemLabel="Carrito compra" itemValue="1"/>
+						<f:selectItem itemLabel="Consumicion" itemValue="2"/>
+						<f:selectItem itemLabel="Extra (Concepto)" itemValue="3"/>
+						<f:selectItem itemLabel="Factura" itemValue="4"/>
+						<f:selectItem itemLabel="Gasolina" itemValue="5"/>
+						<f:selectItem itemLabel="Medicamentos/Farmacia" itemValue="6"/>
+						<f:selectItem itemLabel="Mobiliario casa" itemValue="7"/>
+						<f:selectItem itemLabel="Recibo" itemValue="8"/>
+						<f:selectItem itemLabel="Regalos" itemValue="9"/>
+						<f:selectItem itemLabel="Ropa" itemValue="10"/>
+						<f:selectItem itemLabel="Viajes" itemValue="11"/>	
+					</h:selectOneMenu>
+					<p:message for="categoryId" />
+
+					<label for="customPanel">Indique la periodicidad de la factura:</label>					
+					<p:outputPanel id="customPanel">
+						<f:ajax render="@form">
+							<p:selectOneRadio id="customRadio" value="#{billBean.periodicity}" layout="custom">  
+		        				<f:selectItem itemLabel="Puntual" itemValue="false" />  
+		        				<f:selectItem itemLabel="Periódica" itemValue="true" />  
+							</p:selectOneRadio>
+						</f:ajax>
+						  
+						<h:panelGrid id="periodicityGrid" columns="2" border="0" styleClass="grid">
+							<p:radioButton id="opt1" for="customRadio" itemIndex="0"/>  
+							<h:outputLabel for="opt1" value="Option 1" />  
+							<p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
+							<h:outputLabel for="opt2" value="Option 2" />
+						</h:panelGrid>
+						<p:outputPanel id="punctualPanel" binding="#{billBean.punctualPanel}">
+							<h:panelGrid columns="1">
+								<h:outputLabel for="paymentDate" value="#{msg.paymentDate}" />
+								<p:calendar id="paymentDate" label="paymentDate" value="#{billBean.paymentDate}" required="true" showOn="button">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</p:calendar>
+							</h:panelGrid>  
+						</p:outputPanel>							
+						<p:outputPanel id="intervalCalendarPanel" binding="#{billBean.intervalCalendarPanel}">  
+							<h:panelGrid columns="2">
+								<h:outputLabel for="startDate" value="#{msg.startDate}" />
+								<h:outputLabel for="endDate" value="#{msg.endDate}" />
+								<p:calendar id="startDate" label="startDate" value="#{billBean.startDate}" required="true" showOn="button">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</p:calendar>
+								<p:calendar id="endDate" label="endDate" value="#{billBean.endDate}" required="true" showOn="button">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</p:calendar>
+							</h:panelGrid>  
+						</p:outputPanel>	
+					</p:outputPanel>
+										  
+					<p:message for="paymentDate" />
+					<h:outputLabel for="amount" value="#{msg.amount}" />
+					<p:inputText id="amount" label="amount" value="#{billBean.amount}" required="true" requiredMessage="#{msg['amount-required']}" validator="#{billBean.validateAmount}" >
+	
+					</p:inputText>
+					<p:message for="amount" />
+					<h:outputLabel for="description" value="#{msg.description}" />
+					<p:inputTextarea id="description" label="description" value="#{billBean.description}" required="true" requiredMessage="#{msg['description-required']}" rows="5" cols="33">
+						<f:validateLength minimum="5" maximum="10"></f:validateLength>
+					</p:inputTextarea>
+					<p:message for="description" />
+					<p:commandButton type="submit" value="#{msg.save}" action="#{billBean.addBill}" ajax="false" ></p:commandButton>
+					
+					Texto extraaaa
+					
+					<h:outputLabel for="normal" value="Normal" />
+					<p:inputText id="normal" label="normal" value="#{billBean.normal}">
+					</p:inputText>
+					
+					<h:outputLabel for="mobile" value="Mobile" />
+					<p:inputText id="mobile" label="mobile" value="#{billBean.mobile}">
+					</p:inputText>
+					
+					<h:outputLabel for="tablet" value="Tablet" />
+					<p:inputText id="tablet" label="tablet" value="#{billBean.tablet}">
+					</p:inputText>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+
+	</ui:composition>
+
+</h:body>
+</html>

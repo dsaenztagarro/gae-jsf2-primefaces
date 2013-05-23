@@ -6,13 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import com.davlanca.billmanager.model.User;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
@@ -22,15 +20,8 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 
 	private static final Logger log = Logger.getLogger(AbstractController.class.getName());
 
-	//@Autowired
-	//private ObjectifyFactory objectifyFactory;
-
 	public UserDAOImpl() {
 	}
-
-	/*public UserDAOImpl(ObjectifyFactory objectifyFactory) {
-		this.objectifyFactory = objectifyFactory;
-	}*/
 
 	@Override
 	public void create(User pet) throws Exception {
@@ -49,7 +40,6 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 		if (pet == null)
 			return false;
 
-		//Objectify ofy = objectifyFactory.begin();
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
 		
@@ -66,7 +56,6 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 
 	@Override
 	public boolean remove(User pet) {
-		//Objectify ofy = objectifyFactory.begin();
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
 		
@@ -76,7 +65,6 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 
 	@Override
 	public List<User> findAll() {
-		//Objectify ofy = objectifyFactory.begin();
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
 
@@ -88,7 +76,6 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 	
 	@Override
     public List<User> findBy(HashMap<String,Object> propList) {
-    	//Objectify ofy = objectifyFactory.begin();
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
     	
@@ -106,7 +93,6 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 	
 	@Override
     public User getByProperty(String propName, Object propValue) {
-    	//Objectify ofy = objectifyFactory.begin();
 		ObjectifyService.register(User.class);
 		Objectify ofy = ObjectifyService.begin();
 		

@@ -8,6 +8,14 @@
 >
 <h:head>
 	<title>Gestión de Gastos</title>
+	<style>
+		.ChartGrid {
+			
+		}
+		.ChartGrid td {
+			padding: 20px;
+		}
+	</style>
 </h:head>
 <h:body>
 
@@ -25,8 +33,21 @@
 		
 		<ui:define name="content">
 			
-Panel de control!!
-		
+			<div id="main">
+				<div class="shell">	
+					<h:panelGrid columns="2" border="0" styleClass="ChartGrid" >
+						<p:pieChart id="sample" value="#{chartBean.pieModel}" legendPosition="w"  
+                		title="Sample Pie Chart" showDataLabels="true" sliceMargin="5" style="width:400px;height:300px" />  
+						<p:barChart id="stacked" value="#{chartBean.categoryModel}" legendPosition="ne" style="width:400px;height:300px"  
+							title="Stacked Bar Chart" stacked="true" barMargin="50" min="0" max="300"/>  
+						<p:meterGaugeChart id="custom" value="#{chartBean.meterGaugeModel}" showTickLabels="true" labelHeightAdjust="110" intervalOuterRadius="130"   
+                  	seriesColors="66cc66, 93b75f, E7E658, cc6666" style="width:400px;height:250px" title="Custom Options" label="km/h"/>  					
+						<p:meterGaugeChart id="custom2" value="#{chartBean.meterGaugeModel}" showTickLabels="false" labelHeightAdjust="110" intervalOuterRadius="130"   
+                  	seriesColors="66cc66, 93b75f, E7E658, cc6666" style="width:400px;height:250px" title="Custom Options" label="km/h"/>  					
+					</h:panelGrid>
+				</div>
+			</div>
+					
 		</ui:define>
 				
 	</ui:composition>

@@ -1,16 +1,26 @@
 package com.davlanca.billmanager.controller;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.DeviceUtils;
 
 import com.davlanca.billmanager.service.UserService;
+import com.davlanca.billmanager.util.Global;
+import com.davlanca.billmanager.util.MobileViewHandler;
 
 public class LoginController implements Serializable {
  
 	private static final long serialVersionUID = 1L;
  
+	private static final Logger log = Logger.getLogger(LoginController.class.getName());
+	
+	private boolean mobileDevice;
+	
 	private String password;
 	private String userName;
 	
@@ -57,8 +67,49 @@ public class LoginController implements Serializable {
 
 
 	public String checkLogin() {
-		
-		return "success";
+		String action = "success";
+        String renderKitId = FacesContext.getCurrentInstance().getViewRoot().getRenderKitId();   
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        setMobileDevice(request.getSession().getAttribute("isMobileDevice").equals(Global.TRUE));
+
+        //log.info("session.isMobileDevice: " + request.getSession().getAttribute("isMobileDevice").equals(Global.TRUE));
+        log.info("session.isMobileDevice: " + isMobileDevice());
+        log.info("renderKitId: " + renderKitId);
+        
+        
+        
+        if(renderKitId.equalsIgnoreCase("PRIMEFACES_MOBILE")){
+            action = "mobile";
+        }
+        
+        log.info("action: " + action);
+        
+		return action;
 	}
+
+
+	/**
+	 * @return the mobileDevice
+	 */
+	public boolean isMobileDevice() {
+		return mobileDevice;
+	}
+
+	/**
+	 * @return the mobileDevice
+	 */
+	public boolean getMobileDevice() {
+		return mobileDevice;
+	}
+	
+	/**
+	 * @param mobileDevice the mobileDevice to set
+	 */
+	public void setMobileDevice(boolean mobileDevice) {
+		this.mobileDevice = mobileDevice;
+	}
+
+	
 	
 }

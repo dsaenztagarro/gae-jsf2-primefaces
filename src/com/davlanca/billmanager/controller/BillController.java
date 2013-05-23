@@ -3,12 +3,14 @@ package com.davlanca.billmanager.controller;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
+import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpServletRequest;
 
 import com.davlanca.billmanager.model.Bill;
 import com.davlanca.billmanager.service.BillService;
@@ -18,8 +20,16 @@ public class BillController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private BillService billService;
-	private UIInput _endDateInput;
-	private UIInput _startDateInput;
+	
+	private boolean renderIntervalCalendarPanel;
+	private boolean renderPunctualPanel;
+	
+	private UIPanel punctualPanel;
+	private UIPanel intervalCalendarPanel;
+	
+	private String normal;
+	private String mobile;
+	private String tablet;
 	
 	private int amount;
 	private int categoryId;
@@ -31,8 +41,13 @@ public class BillController implements Serializable {
 	private Date startDate;
 	private int userId;
 
-
-
+	@PostConstruct
+	public void init() {
+		HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		setNormal((String)request.getAttribute("isNormal"));
+		setMobile((String)request.getAttribute("isMobile"));
+		setTablet((String)request.getAttribute("isTablet"));
+	}
 
 	/**
 	 * @return the billService
@@ -41,22 +56,79 @@ public class BillController implements Serializable {
 		return billService;
 	}
 
-
 	/**
-	 * @return the _endDateInput
+	 * @param billService the billService to set
 	 */
-	public UIInput get_endDateInput() {
-		return _endDateInput;
+	public void setBillService(BillService billService) {
+		this.billService = billService;
+	}
+	
+	
+	/**
+	 * @return the renderIntervalCalendarPanel
+	 */
+	public boolean isRenderIntervalCalendarPanel() {
+		return renderIntervalCalendarPanel;
 	}
 
-
 	/**
-	 * @return the _startDateInput
+	 * @return the renderPunctualPanel
 	 */
-	public UIInput get_startDateInput() {
-		return _startDateInput;
+	public boolean isRenderPunctualPanel() {
+		return renderPunctualPanel;
 	}
 
+	/**
+	 * @param renderIntervalCalendarPanel the renderIntervalCalendarPanel to set
+	 */
+	public void setRenderIntervalCalendarPanel(boolean renderIntervalCalendarPanel) {
+		this.renderIntervalCalendarPanel = renderIntervalCalendarPanel;
+	}
+
+	/**
+	 * @param renderPunctualPanel the renderPunctualPanel to set
+	 */
+	public void setRenderPunctualPanel(boolean renderPunctualPanel) {
+		this.renderPunctualPanel = renderPunctualPanel;
+	}
+	
+	/**
+	 * @param periodicity the periodicity to set
+	 */
+	public void setPeriodicity(boolean periodicity) {
+		this.periodicity = periodicity;
+		System.out.println("periodicity updated");
+		punctualPanel.setRendered(periodicity);
+		intervalCalendarPanel.setRendered(!periodicity);
+	}
+
+	/**
+	 * @return the punctualPanel
+	 */
+	public UIPanel getPunctualPanel() {
+		return punctualPanel;
+	}
+
+	/**
+	 * @return the intervalCalendarPanel
+	 */
+	public UIPanel getIntervalCalendarPanel() {
+		return intervalCalendarPanel;
+	}
+
+	/**
+	 * @param punctualPanel the punctualPanel to set
+	 */
+	public void setPunctualPanel(UIPanel punctualPanel) {
+		this.punctualPanel = punctualPanel;
+	}
+
+	/**
+	 * @param intervalCalendarPanel the intervalCalendarPanel to set
+	 */
+	public void setIntervalCalendarPanel(UIPanel intervalCalendarPanel) {
+		this.intervalCalendarPanel = intervalCalendarPanel;
+	}
 
 	/**
 	 * @return the amount
@@ -121,31 +193,6 @@ public class BillController implements Serializable {
 		return userId;
 	}
 
-
-	/**
-	 * @param billService the billService to set
-	 */
-	public void setBillService(BillService billService) {
-		this.billService = billService;
-	}
-
-
-	/**
-	 * @param _endDateInput the _endDateInput to set
-	 */
-	public void set_endDateInput(UIInput _endDateInput) {
-		this._endDateInput = _endDateInput;
-	}
-
-
-	/**
-	 * @param _startDateInput the _startDateInput to set
-	 */
-	public void set_startDateInput(UIInput _startDateInput) {
-		this._startDateInput = _startDateInput;
-	}
-
-
 	/**
 	 * @param amount the amount to set
 	 */
@@ -183,19 +230,6 @@ public class BillController implements Serializable {
 	 */
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
-	}
-
-
-	/**
-	 * @param periodicity the periodicity to set
-	 */
-	public void setPeriodicity(boolean periodicity) {
-		this.periodicity = periodicity;
-		
-		System.out.println("startDateInput: " + _startDateInput);
-		System.out.println("periodicity: " + periodicity);
-		
-		//_startDateInput.setRendered(periodicity);
 	}
 
 
@@ -249,5 +283,49 @@ public class BillController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, doneMessage);
 		return outcome;
 	}
+
+	/**
+	 * @return the normal
+	 */
+	public String getNormal() {
+		return normal;
+	}
+
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+
+	/**
+	 * @return the tablet
+	 */
+	public String getTablet() {
+		return tablet;
+	}
+
+	/**
+	 * @param normal the normal to set
+	 */
+	public void setNormal(String normal) {
+		this.normal = normal;
+	}
+
+	/**
+	 * @param mobile the mobile to set
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	/**
+	 * @param tablet the tablet to set
+	 */
+	public void setTablet(String tablet) {
+		this.tablet = tablet;
+	}
+	
+	
 	
 }
